@@ -59,7 +59,7 @@ let P = percent / 100 / 12;
 let monthlyPayment = S * (P + (P / (((1 + P) ** n) - 1)));
 
   totalAmount = monthlyPayment * n;
-  totalAmount=Number(totalAmount.toFixed(2));
+  totalAmount = Number(totalAmount.toFixed(2));
 
    return(totalAmount);
 }
