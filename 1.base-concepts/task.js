@@ -1,4 +1,3 @@
-//Задача 1
 "use strict"
 
 function solveEquation (a, b, c) {
@@ -26,8 +25,6 @@ function solveEquation (a, b, c) {
 
 
 //Задача 2
-
-
 function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
 
