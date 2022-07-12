@@ -16,11 +16,12 @@ if(this.marks === undefined){
   }
 }
 
-Student.prototype.addMarks =  function(...mark) {
-if (this.marks === undefined) { 
-this.marks = [mark];
-} else {
-  this.marks.push(...mark);
+Student.prototype.addMarks = function(...marks) {
+  if (this.marks === undefined) {
+    this.marks = [];
+    this.marks.push(...marks);
+  } else {
+    this.marks.push(...marks);
   }
 }
 
@@ -30,17 +31,10 @@ this.marks.forEach(item => {sum += item});
 return sum / this.marks.length
 }
 
-Student.prototype.exclude = function(reason) {
-this.exclude = reason;
+Student.prototype.exclude = function (reason) {
+  delete this.subject;
+  delete this.marks;
 
-delete this.subject;
-delete this.marks;
+  this.excluded = reason;
 }
 
-let student2 = new Student("Buzz", "female", 35);
-student2.setSubject("Geometry");
-student2.addMark(2);
-student2.addMark(3);
-student2.addMark(2);
-student2.exclude('low grades')
-console.log(student2)
