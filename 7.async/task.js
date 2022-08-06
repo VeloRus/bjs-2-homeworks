@@ -27,7 +27,7 @@ class AlarmClock {
         return `${hours}:${minutes}`
     }
 
-    start() {
+   /* start() {
         let checkClock = (alarm) => {
             if (alarm.time === this.getCurrentFormattedTime()) {
                 return alarm.callback();
@@ -44,7 +44,27 @@ class AlarmClock {
             clearInterval(this.timerId);
             this.timerId = null;
         }
+    }*/
+
+    start() {
+        let checkClock = (alarm) => {
+            if (alarm.time == this.getCurrentFormattedTime()) {
+                return this.alarmCollection.callback()
+            }
+        }
+
+        if (this.timerId == null) {
+            this.timerId = setInterval(this.alarmCollection.forEach((item) => checkClock(item)), 1000)
+        }
     }
+
+    stop() {
+        if(this.timerId !== null) {
+            clearInterval(this.timerId);
+            this.timerId = null
+        }
+    }
+
 
     printAlarms() {
         console.log(`Всего будильников ${this.alarmCollection.length}`)
@@ -58,3 +78,23 @@ class AlarmClock {
 
 }
 
+
+function testCase() {
+    let phoneAlarm = new AlarmClock();
+
+    phoneAlarm.addClock('18:26', () => console.log('Пора вставать'), 1);
+    phoneAlarm.addClock('18:27', () => console.log('Пора вставать'), 2);
+    phoneAlarm.addClock('18:28', () => {console.log("Вставай уже!"); 
+    phoneAlarm.removeClock(2)}, 3);
+    phoneAlarm.addClock("18:29", () => {
+        console.log("Вставай, а то проспишь!");
+        phoneAlarm.stop();
+        phoneAlarm.clearAlarms(); 
+        phoneAlarm.printAlarms();
+      }, 4);
+    phoneAlarm.printAlarms();
+
+    phoneAlarm.start();
+}
+ 
+testCase();
